@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+
+  <head>
+    <title>Janya Water Sensor Events</title>
+
+    <meta charset="utf-8" />
+    <title>AngularJS Water Records from BlueMix Cloudant</title>
+    <!-- <link rel="stylesheet" href="style.css" /> -->
+
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.min.js"></script>
+    <script src="app.js"></script>
+  </head>
+
+  <body>
+  <div ng-controller="PostCtrl">
+      <p><b>Janya Sensor Records</b></p>
+      
+     <table border="1">
+          <thead>
+          <tr>
+            <th> 
+                <a href="#" ng-click="orderByField='flowRate'; reverseSort = !reverseSort">
+                  Flow Rate <span ng-show="orderByField == 'flowRate'">
+                  <span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span></span>
+                </a>
+            </th>
+            <th> 
+                <a href="#" ng-click="orderByField='occuredAt'; reverseSort = !reverseSort">
+                  Occured At IST <span ng-show="orderByField == 'occuredAt'">
+                  <span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span></span>
+                </a>
+            </th>
+            <th> Record_Id</th>
+          </tr>
+          </thead>>
+
+
+        <tr  ng-repeat="x in records | orderBy:orderByField:reverseSort" >
+          <td>{{ x.flowRate }}</td>
+          <td>{{ x.occuredAt | date:'dd-M-yyyy H:mm' }}</td>
+          <td>{{ x._id }}</td>
+        </tr>
+      </table>
+      <span class="label"> 
+        <div ng-show="!reverseSort"> Sorted by By: {{orderByField}}, Ascending</div> 
+        <div ng-show="reverseSort">  Sorted by By: {{orderByField}}, Descending</div>
+      </span>
+      </p>
+    </div>
+
+   <!--     Commented out  for testing
+    <div ng-controller="MainCtrl">
+      <p>result : {{result}}</p>
+      <p>status : {{status}}</p>
+      <table border="1">
+        <tr  ng-repeat="x in records">
+          <td>{{ x.id }}</td>
+          <td>{{ x.value.rev }}</td>
+        </tr>
+      </table>
+      </p>
+    </div>
+
+-->
+    
+
+
+
+  </body>
+</html>
